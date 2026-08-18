@@ -64,7 +64,7 @@ func NewEmbed(playerGains []wiseoldman.PlayerGains, data EmbedData, by config.So
 	}
 
 	return Embed{
-		Title:       "OSRS Activity",
+		Title:       "OSRS Activity :trophy:",
 		Description: fmt.Sprintf("Ranks Players in the group by %s over the past %s", strings.ToTitle(string(by)), strings.ToTitle(string(period))),
 		Colour:      colourValue,
 		Thumbnail: Thumbnail{
@@ -112,7 +112,7 @@ func buildFieldsFromPlayerData(playerGains []wiseoldman.PlayerGains) (fields []F
 	fields = make([]Field, len(playerGains))
 	for index, player := range playerGains {
 		fields[index] = Field{
-			player.PlayerName,
+			fmt.Sprintf("%s %s", addEmojiForGainsPosition(index, len(playerGains)), player.PlayerName),
 			fmt.Sprintf(
 				"**EXP:** `%s`\t**EHP:** `%.3f`\t**EHB:** `%.3f`",
 				formatInt(player.PlayerData.Skills["overall"].Experience.Gained),
@@ -124,6 +124,24 @@ func buildFieldsFromPlayerData(playerGains []wiseoldman.PlayerGains) (fields []F
 	}
 
 	return fields
+}
+
+func addEmojiForGainsPosition(position int, players int) string {
+	fmt.Println(position, players)
+	if players > 1 && position == players-1 {
+		return ":poop:"
+	}
+
+	switch position {
+	case 0:
+		return ":first_place:"
+	case 1:
+		return ":second_place:"
+	case 2:
+		return ":third_place:"
+	default:
+		return ""
+	}
 }
 
 func formatInt(number int) string {

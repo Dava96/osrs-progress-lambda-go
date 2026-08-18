@@ -1,27 +1,27 @@
 {
   "embeds": [
     {
-      "title": "OSRS Activity",
+      "title": "OSRS Activity :trophy:",
       "description": "Ranks Players in the group by {VALUE} over the past {PERIOD}",
       "color": 16744805,
       "fields": [
         {
-          "name": "MyRsn0",
+          "name": ":first_place: MyRsn0",
           "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
           "inline": false
         },
         {
-          "name": "MyRsn1",
+          "name": ":second_place: MyRsn1",
           "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
           "inline": false
         },
         {
-          "name": "MyRsn2",
+          "name": ":third_place: MyRsn2",
           "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
           "inline": false
         },
         {
-          "name": "MyRsn3",
+          "name": ":poop: MyRsn3",
           "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`"
         }
       ],
