@@ -35,7 +35,7 @@ resource "aws_cloudwatch_event_rule" "daily" {
   name        = "trigger-${var.lambda_function_name}"
   description = "Triggers the Osrs progress lambda on a fixed cron schedule"
 
-  schedule_expression = "cron(50 12 * * *)"
+  schedule_expression = "cron(55 12 * * ? *)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda" {
