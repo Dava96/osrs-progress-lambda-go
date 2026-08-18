@@ -38,7 +38,7 @@ variable "gains_query_mode" {
 
 variable "timezone" {
   type        = string
-  default     = ""
+  default     = "UTC"
   description = "The timezone to use when gains query mode is set to range."
 }
 

@@ -32,15 +32,6 @@ jobs:
       TF_VAR_usernames: ${{ secrets.USERNAMES }}
       TF_VAR_webhook_url: ${{ secrets.WEBHOOK_URL }}
 
-      TF_VAR_sort_by: ${{ vars.SORT_BY }}
-      TF_VAR_gains_query_mode: ${{ vars.GAINS_QUERY_MODE }}
-      TF_VAR_gains_period: ${{ vars.GAINS_PERIOD }}
-      TF_VAR_timezone: ${{ vars.TIMEZONE }}
-      TF_VAR_embed_colour: ${{ vars.EMBED_COLOUR }}
-
-      TF_VAR_image_url: ${{ secrets.IMAGE_URL }}
-      TF_VAR_thumbnail_url: ${{ secrets.THUMBNAIL_URL }}
-
     steps:
       - name: Check out verified commit
         uses: actions/checkout@v7
