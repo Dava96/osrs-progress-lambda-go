@@ -35,7 +35,7 @@ Content-type: application/json
         "icon_url": "https://oldschool.runescape.wiki/images/Cheer_%28Penguin%29_emote_icon.png?e60bd"
       },
       "footer": {
-        "text": "Poo"
+        "text": "test"
       },
       "timestamp": "2026-08-30T23:00:00.000Z",
       "thumbnail": {

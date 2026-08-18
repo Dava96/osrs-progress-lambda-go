@@ -89,6 +89,7 @@ func TestNewEmbed(t *testing.T) {
 	for index := range mockGains {
 
 		gains := getPlayerGainsResponse(t)
+
 		gains.PlayerName = fmt.Sprintf("MyRsn%d", index)
 
 		overall := gains.PlayerData.Skills["overall"]
@@ -254,6 +255,69 @@ func TestParseImageUrl(t *testing.T) {
 
 			if test.want.String() != got.String() {
 				t.Errorf("got %s, want %s", got.Path, test.want.Path)
+			}
+		})
+	}
+}
+
+func TestAddEmojiForGainsPosition(t *testing.T) {
+	type args struct {
+		position int
+		players  int
+	}
+	tests := []struct {
+		name  string
+		input args
+		want  string
+	}{
+		{
+			name: "first position",
+			input: args{
+				position: 0,
+				players:  1,
+			},
+			want: ":first_place:",
+		},
+		{
+			name: "second position",
+			input: args{
+				position: 1,
+				players:  4,
+			},
+			want: ":second_place:",
+		},
+		{
+			name: "third position",
+			input: args{
+				position: 2,
+				players:  4,
+			},
+			want: ":third_place:",
+		},
+		{
+			name: "last position",
+			input: args{
+				position: 3,
+				players:  4,
+			},
+			want: ":poop:",
+		},
+		{
+			name: "fourth position",
+			input: args{
+				position: 4,
+				players:  6,
+			},
+			want: "",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			got := addEmojiForGainsPosition(test.input.position, test.input.players)
+
+			if got != test.want {
+				t.Errorf("got %s, expected %s", got, test.want)
 			}
 		})
 	}
