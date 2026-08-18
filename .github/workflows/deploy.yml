@@ -1,0 +1,89 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows:
+      - Verify
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+
+    runs-on: ubuntu-latest
+    environment: production
+
+    concurrency:
+      group: production-deployment
+      cancel-in-progress: false
+
+    permissions:
+      contents: read
+      id-token: write
+
+    env:
+      TF_IN_AUTOMATION: "true"
+
+      TF_VAR_aws_region: ${{ vars.AWS_REGION }}
+      TF_VAR_usernames: ${{ secrets.USERNAMES }}
+      TF_VAR_webhook_url: ${{ secrets.WEBHOOK_URL }}
+
+      TF_VAR_sort_by: ${{ vars.SORT_BY }}
+      TF_VAR_gains_query_mode: ${{ vars.GAINS_QUERY_MODE }}
+      TF_VAR_gains_period: ${{ vars.GAINS_PERIOD }}
+      TF_VAR_timezone: ${{ vars.TIMEZONE }}
+      TF_VAR_embed_colour: ${{ vars.EMBED_COLOUR }}
+
+      TF_VAR_image_url: ${{ secrets.IMAGE_URL }}
+      TF_VAR_thumbnail_url: ${{ secrets.THUMBNAIL_URL }}
+
+    steps:
+      - name: Check out verified commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build Lambda package
+        run: |
+          mkdir -p build
+          GOOS=linux GOARCH=arm64 CGO_ENABLED=0 \
+            go build \
+            -trimpath \
+            -tags lambda.norpc \
+            -ldflags="-s -w" \
+            -o build/bootstrap .
+
+          cd build
+          zip osrs-progress-lambda.zip bootstrap
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          role-session-name: GitHubActionsLambdaDeployment
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Terraform init
+        run: terraform -chdir=infrastructure init -input=false
+
+      - name: Terraform validate
+        run: terraform -chdir=infrastructure validate -no-color
+
+      - name: Terraform plan
+        run: terraform -chdir=infrastructure plan -input=false -no-color -lock-timeout=5m -out=tfplan
+
+      - name: Terraform apply
+        run: terraform -chdir=infrastructure apply -input=false -auto-approve -lock-timeout=5m tfplan

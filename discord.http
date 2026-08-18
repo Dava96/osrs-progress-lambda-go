@@ -1,0 +1,46 @@
+
+###
+POST https://discord.com/api/webhooks/example/example
+Content-type: application/json
+
+{
+  "embeds": [
+    {
+      "title": "OSRS Activity",
+      "description": "Ranks players in the group by {VALUE}",
+      "color": 16744805,
+      "fields": [
+        {
+          "name": "#1 MyRsn",
+          "value": "**EXP:** `10,000,00`\t\t**EHP:** `1.30561`\t\t**EHB:** `312`",
+          "inline": false
+        },
+        {
+          "name": "#2 MyRsn2",
+          "value": "**EXP**: 1312\nEHP: 13\nEHB: 312",
+          "inline": false
+        },
+        {
+          "name": "#3 MyRsn3",
+          "value": "EXP: 123\nEHP: 321\nEHB: 123",
+          "inline": false
+        },
+        {
+          "name": "#4 MyRsn4",
+          "value": "EXP: 123\nEHP: 213\nEHB: 1323"
+        }
+      ],
+      "author": {
+        "name": "OSRS Activity",
+        "icon_url": "https://oldschool.runescape.wiki/images/Cheer_%28Penguin%29_emote_icon.png?e60bd"
+      },
+      "footer": {
+        "text": "Poo"
+      },
+      "timestamp": "2026-08-30T23:00:00.000Z",
+      "thumbnail": {
+        "url": "https://oldschool.runescape.wiki/images/Cheer_%28Penguin%29_emote_icon.png?e60bd"
+      }
+    }
+  ]
+}

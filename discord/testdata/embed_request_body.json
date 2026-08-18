@@ -1,0 +1,41 @@
+{
+  "embeds": [
+    {
+      "title": "OSRS Activity",
+      "description": "Ranks Players in the group by {VALUE} over the past {PERIOD}",
+      "color": 16744805,
+      "fields": [
+        {
+          "name": "MyRsn0",
+          "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
+          "inline": false
+        },
+        {
+          "name": "MyRsn1",
+          "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
+          "inline": false
+        },
+        {
+          "name": "MyRsn2",
+          "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`",
+          "inline": false
+        },
+        {
+          "name": "MyRsn3",
+          "value": "**EXP:** `1,000,000`\t**EHP:** `126.261`\t**EHB:** `127.261`"
+        }
+      ],
+      "author": {
+        "name": "OSRS Activity",
+        "icon_url": "https://oldschool.runescape.wiki/images/Cheer_%28Penguin%29_emote_icon.png?e60bd"
+      },
+      "footer": {
+        "text": "Poo"
+      },
+      "timestamp": "2026-08-30T23:00:00.000Z",
+      "thumbnail": {
+        "url": "https://oldschool.runescape.wiki/images/Cheer_%28Penguin%29_emote_icon.png?e60bd"
+      }
+    }
+  ]
+}

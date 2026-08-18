@@ -1,0 +1,15 @@
+POST https://api.wiseoldman.net/v2/players/zezima
+
+###
+GET https://api.wiseoldman.net/v2/players/zezima/gained?period=day&startDate=2024-01-01T00:00:00.000Z&
+    endDate=2024-01-07T00:00:00.000Z
+
+###
+
+GET https://api.wiseoldman.net/v2/players/zezima/gained?startDate=2026-07-03T00:00:00.000Z&
+    endDate=2026-07-04T00:00:00.000Z
+
+###
+
+GET https://api.wiseoldman.net/v2/players/zezima/gained?period=day
+
