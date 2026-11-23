@@ -1,5 +1,6 @@
 name: Deploy
 on:
+  workflow_dispatch:
   workflow_run:
     workflows:
       - Verify
@@ -11,8 +12,11 @@ on:
 jobs:
   deploy:
     if: >
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push'
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push'
+      )
 
     runs-on: ubuntu-latest
     environment: production
@@ -36,7 +40,7 @@ jobs:
       - name: Check out verified commit
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Set up Go
         uses: actions/setup-go@v7
